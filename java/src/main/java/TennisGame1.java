@@ -3,6 +3,8 @@ import java.util.Map;
 
 public class TennisGame1 implements TennisGame {
 
+    public static final String ADVANTAGE = "Advantage ";
+    public static final String WIN_FOR = "Win for ";
     private int player1Score = 0;
     private int player2Score = 0;
     private final String player1Name;
@@ -58,10 +60,10 @@ public class TennisGame1 implements TennisGame {
     private String callAdvantageOrWin() {
         String score;
         int minusResult = player1Score - player2Score;
-        if (minusResult == 1) score = "Advantage " + player1Name;
-        else if (minusResult == -1) score = "Advantage " + player2Name;
-        else if (minusResult >= 2) score = "Win for " + player1Name;
-        else score = "Win for " + player2Name;
+        if (minusResult == 1) score = ADVANTAGE + player1Name;
+        else if (minusResult == -1) score = ADVANTAGE + player2Name;
+        else if (minusResult >= 2) score = WIN_FOR + player1Name;
+        else score = WIN_FOR + player2Name;
         return score;
     }
 
