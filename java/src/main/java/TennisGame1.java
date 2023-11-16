@@ -1,10 +1,19 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class TennisGame1 implements TennisGame {
 
     private int m_score1 = 0;
     private int m_score2 = 0;
-    private String player1Name;
-    private String player2Name;
+    private final String player1Name;
+    private final String player2Name;
+
+    private final Map<Integer, String> pointsToCall = new HashMap<>(){{
+        put(0, "Love");
+        put(1, "Fifteen");
+        put(2, "Thirty");
+        put(3, "Forty");
+    }};
 
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -39,14 +48,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String callSameNumberOfPoints() {
-        String score;   
-        score = switch (m_score1) {
-            case 0 -> "Love-All";
-            case 1 -> "Fifteen-All";
-            case 2 -> "Thirty-All";
-            default -> "Deuce";
-        };
-        return score;
+        if (m_score1 <= 2) {
+            return pointsToCall.get(m_score1) + "-All";
+        } else {
+            return "Deuce";
+        }
     }
 
     private String callAdvantageOrWin() {
@@ -68,17 +74,9 @@ public class TennisGame1 implements TennisGame {
                 scoreBuilder.append("-");
                 tempScore = m_score2;
             }
-            numberToCall(tempScore, scoreBuilder);
+            scoreBuilder.append(pointsToCall.get(tempScore));
         }
         return scoreBuilder.toString();
     }
 
-    private static void numberToCall(int tempScore, StringBuilder scoreBuilder) {
-        switch (tempScore) {
-            case 0 -> scoreBuilder.append("Love");
-            case 1 -> scoreBuilder.append("Fifteen");
-            case 2 -> scoreBuilder.append("Thirty");
-            case 3 -> scoreBuilder.append("Forty");
-        }
-    }
 }
