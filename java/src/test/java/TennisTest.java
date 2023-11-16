@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.stream.Stream;
@@ -66,6 +67,30 @@ public class TennisTest {
     public void checkAllScoresTennisGame1(int player1Points, int player2Points, String expectedScore) {
         TennisGame game = new TennisGame1("player1", "player2");
         checkAllScores("player1", player1Points, "player2", player2Points, expectedScore, game);
+    }
+
+    @Test
+    void checkWinTennisGame1WithPippoAsPlayer1() {
+        TennisGame1 game = new TennisGame1("Pippo", "player2");
+        checkAllScores("Pippo", 4, "player2", 2, "Win for Pippo", game);
+    }
+
+    @Test
+    void checkAdvantageTennisGame1WithPippoAsPlayer1() {
+        TennisGame1 game = new TennisGame1("Pippo", "player2");
+        checkAllScores("Pippo", 4, "player2", 3, "Advantage Pippo", game);
+    }
+
+    @Test
+    void checkWinTennisGame1WithPlutoAsPlayer2() {
+        TennisGame1 game = new TennisGame1("Pippo", "Pluto");
+        checkAllScores("Pippo", 4, "Pluto", 6, "Win for Pluto", game);
+    }
+
+    @Test
+    void checkAdvantageTennisGame1WithPlutoAsPlayer2() {
+        TennisGame1 game = new TennisGame1("Pippo", "Pluto");
+        checkAllScores("Pippo", 4, "Pluto", 5, "Advantage Pluto", game);
     }
 
     @ParameterizedTest
