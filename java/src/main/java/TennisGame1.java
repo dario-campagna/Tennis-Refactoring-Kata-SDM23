@@ -10,7 +10,7 @@ public class TennisGame1 implements TennisGame {
     private final String player1Name;
     private final String player2Name;
 
-    private final Map<Integer, String> pointsToCall = new HashMap<>(){{
+    private final Map<Integer, String> pointsToCall = new HashMap<>() {{
         put(0, "Love");
         put(1, "Fifteen");
         put(2, "Thirty");
@@ -32,8 +32,10 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         if (isTied()) {
             return callSameNumberOfPoints();
-        } else if (isAdvantageOrWin()) {
-            return callAdvantageOrWin();
+        } else if (isAdvantage()) {
+            return callAdvantage();
+        } else if (isWin()) {
+            return callWin();
         } else {
             return callFromLoveToForty();
         }
@@ -43,8 +45,24 @@ public class TennisGame1 implements TennisGame {
         return player1Score == player2Score;
     }
 
-    private boolean isAdvantageOrWin() {
+    private boolean isAdvantage() {
+        return atLeast4PointsScored() && onePointMoreThanOtherPlayer();
+    }
+
+    private boolean isWin() {
+        return atLeast4PointsScored() && twoPointsMoreThanOtherPlayer();
+    }
+
+    private boolean atLeast4PointsScored() {
         return player1Score >= 4 || player2Score >= 4;
+    }
+
+    private boolean onePointMoreThanOtherPlayer() {
+        return Math.abs(player1Score - player2Score) == 1;
+    }
+
+    private boolean twoPointsMoreThanOtherPlayer() {
+        return Math.abs(player1Score - player2Score) >= 2;
     }
 
     private String callSameNumberOfPoints() {
@@ -55,14 +73,18 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
-    private String callAdvantageOrWin() {
-        String score;
-        int minusResult = player1Score - player2Score;
-        if (minusResult == 1) score = ADVANTAGE + player1Name;
-        else if (minusResult == -1) score = ADVANTAGE + player2Name;
-        else if (minusResult >= 2) score = WIN_FOR + player1Name;
-        else score = WIN_FOR + player2Name;
-        return score;
+    private String callAdvantage() {
+        if (player1Score > player2Score)
+            return ADVANTAGE + player1Name;
+        else
+            return ADVANTAGE + player2Name;
+    }
+
+    private String callWin() {
+        if (player1Score > player2Score)
+            return WIN_FOR + player1Name;
+        else 
+            return WIN_FOR + player2Name;
     }
 
     private String callFromLoveToForty() {
