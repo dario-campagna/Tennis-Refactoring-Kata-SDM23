@@ -3,8 +3,8 @@ import java.util.Map;
 
 public class TennisGame1 implements TennisGame {
 
-    private int m_score1 = 0;
-    private int m_score2 = 0;
+    private int player1Score = 0;
+    private int player2Score = 0;
     private final String player1Name;
     private final String player2Name;
 
@@ -22,9 +22,9 @@ public class TennisGame1 implements TennisGame {
 
     public void wonPoint(String playerName) {
         if (player1Name.equals(playerName))
-            m_score1 += 1;
+            player1Score += 1;
         else
-            m_score2 += 1;
+            player2Score += 1;
     }
 
     public String getScore() {
@@ -40,16 +40,16 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean isTied() {
-        return m_score1 == m_score2;
+        return player1Score == player2Score;
     }
 
     private boolean isAdvantageOrWin() {
-        return m_score1 >= 4 || m_score2 >= 4;
+        return player1Score >= 4 || player2Score >= 4;
     }
 
     private String callSameNumberOfPoints() {
-        if (m_score1 <= 2) {
-            return pointsToCall.get(m_score1) + "-All";
+        if (player1Score <= 2) {
+            return pointsToCall.get(player1Score) + "-All";
         } else {
             return "Deuce";
         }
@@ -57,7 +57,7 @@ public class TennisGame1 implements TennisGame {
 
     private String callAdvantageOrWin() {
         String score;
-        int minusResult = m_score1 - m_score2;
+        int minusResult = player1Score - player2Score;
         if (minusResult == 1) score = "Advantage " + player1Name;
         else if (minusResult == -1) score = "Advantage " + player2Name;
         else if (minusResult >= 2) score = "Win for " + player1Name;
@@ -69,10 +69,10 @@ public class TennisGame1 implements TennisGame {
         int tempScore;
         StringBuilder scoreBuilder = new StringBuilder(score);
         for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = m_score1;
+            if (i == 1) tempScore = player1Score;
             else {
                 scoreBuilder.append("-");
-                tempScore = m_score2;
+                tempScore = player2Score;
             }
             scoreBuilder.append(pointsToCall.get(tempScore));
         }
