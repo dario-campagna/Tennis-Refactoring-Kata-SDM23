@@ -50,13 +50,13 @@ public class TennisTest {
         });
     }
 
-    private static void checkAllScores(int player1Points, int player2Points, String expectedScore, TennisGame game) {
+    private static void checkAllScores(String player1Name, int player1Points, String player2Name, int player2Points, String expectedScore, TennisGame game) {
         int highestScore = Math.max(player1Points, player2Points);
         for (int i = 0; i < highestScore; i++) {
             if (i < player1Points)
-                game.wonPoint("player1");
+                game.wonPoint(player1Name);
             if (i < player2Points)
-                game.wonPoint("player2");
+                game.wonPoint(player2Name);
         }
         assertEquals(expectedScore, game.getScore());
     }
@@ -65,41 +65,41 @@ public class TennisTest {
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame1(int player1Points, int player2Points, String expectedScore) {
         TennisGame game = new TennisGame1("player1", "player2");
-        checkAllScores(player1Points, player2Points, expectedScore, game);
+        checkAllScores("player1", player1Points, "player2", player2Points, expectedScore, game);
     }
 
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame2(int player1Points, int player2Points, String expectedScore) {
         TennisGame game = new TennisGame2("player1", "player2");
-        checkAllScores(player1Points, player2Points, expectedScore, game);
+        checkAllScores("player1", player1Points, "player2", player2Points, expectedScore, game);
     }
 
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame3(int player1Points, int player2Points, String expectedScore) {
         TennisGame game = new TennisGame3("player1", "player2");
-        checkAllScores(player1Points, player2Points, expectedScore, game);
+        checkAllScores("player1", player1Points, "player2", player2Points, expectedScore, game);
     }
 
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame4(int player1Points, int player2Points, String expectedScore) {
         TennisGame game = new TennisGame4("player1", "player2");
-        checkAllScores(player1Points, player2Points, expectedScore, game);
+        checkAllScores("player1", player1Points, "player2", player2Points, expectedScore, game);
     }
 
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame5(int player1Points, int player2Points, String expectedScore) {
         TennisGame game = new TennisGame5("player1", "player2");
-        checkAllScores(player1Points, player2Points, expectedScore, game);
+        checkAllScores("player1", player1Points, "player2", player2Points, expectedScore, game);
     }
 
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame6(int player1Points, int player2Points, String expectedScore) {
         TennisGame game = new TennisGame6("player1", "player2");
-        checkAllScores(player1Points, player2Points, expectedScore, game);
+        checkAllScores("player1", player1Points, "player2", player2Points, expectedScore, game);
     }
 }
