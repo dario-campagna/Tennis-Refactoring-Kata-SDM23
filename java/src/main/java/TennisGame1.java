@@ -30,15 +30,13 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
         if (isTied()) {
-            score = callSameNumberOfPoints();
+            return callSameNumberOfPoints();
         } else if (isAdvantageOrWin()) {
-            score = callAdvantageOrWin();
+            return callAdvantageOrWin();
         } else {
-            score = callFromLoveToForty(score);
+            return callFromLoveToForty();
         }
-        return score;
     }
 
     private boolean isTied() {
@@ -67,18 +65,8 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private String callFromLoveToForty(String score) {
-        int tempScore;
-        StringBuilder scoreBuilder = new StringBuilder(score);
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = player1Score;
-            else {
-                scoreBuilder.append("-");
-                tempScore = player2Score;
-            }
-            scoreBuilder.append(pointsToCall.get(tempScore));
-        }
-        return scoreBuilder.toString();
+    private String callFromLoveToForty() {
+        return pointsToCall.get(player1Score) + "-" + pointsToCall.get(player2Score);
     }
 
 }
