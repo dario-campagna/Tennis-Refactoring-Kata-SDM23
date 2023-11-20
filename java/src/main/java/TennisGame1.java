@@ -23,10 +23,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (player1Name.equals(playerName))
+        if (player1Name.equals(playerName)) {
             player1Score += 1;
-        else
+        } else {
             player2Score += 1;
+        }
     }
 
     public String getScore() {
@@ -66,25 +67,15 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String callSameNumberOfPoints() {
-        if (player1Score <= 2) {
-            return pointsToCall.get(player1Score) + "-All";
-        } else {
-            return "Deuce";
-        }
+        return player1Score <= 2 ? pointsToCall.get(player1Score) + "-All" : "Deuce";
     }
 
     private String callAdvantage() {
-        if (player1Score > player2Score)
-            return ADVANTAGE + player1Name;
-        else
-            return ADVANTAGE + player2Name;
+        return player1Score > player2Score ? ADVANTAGE + player1Name : ADVANTAGE + player2Name;
     }
 
     private String callWin() {
-        if (player1Score > player2Score)
-            return WIN_FOR + player1Name;
-        else 
-            return WIN_FOR + player2Name;
+        return player1Score > player2Score ? WIN_FOR + player1Name : WIN_FOR + player2Name;
     }
 
     private String callFromLoveToForty() {
